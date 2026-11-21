@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Heavy input videos (keep only small sample frames in data/)
+data/*.mp4
+data/*.avi
+data/*.mov
+data/*.mkv

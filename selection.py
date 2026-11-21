@@ -1,5 +1,7 @@
 import cv2
 
+from display import is_window_open
+
 WINDOW_NAME = "Select the pedestrian (hold left button and drag, ESC to cancel)"
 RECT_COLOR = (0, 0, 255)
 RECT_THICKNESS = 1
@@ -68,6 +70,10 @@ def select_rectangle(image):
         # attendre 20ms pour passer a la prochaine itiration 
         if cv2.waitKey(REFRESH_DELAY_MS) & 0xFF == ESC_KEY:
             cv2.destroyWindow(WINDOW_NAME)
+            return None
+
+        # si on ferme la fenetre avec la croix : on annule (comme ESC)
+        if not is_window_open(WINDOW_NAME):
             return None
 
 
