@@ -51,7 +51,7 @@ def build_result_view(frame1, frame2, rect, result, margin):
 
     put_label(left, "Frame 1 - reference block (red)")
     put_label(right, "Frame 2 - search area (green), best match (yellow)")
-    put_label(right, f"dx={result.dx}  dy={result.dy}  SAD={result.sad}", line=1)
+    put_label(right, f"dx={result.dx}  dy={result.dy}  MSE={result.mse:.2f}", line=1)
 
     return np.hstack([left, right])
 
@@ -92,3 +92,9 @@ def save_image(path, image):
     if directory:
         os.makedirs(directory, exist_ok=True)
     cv2.imwrite(path, image)
+
+
+
+# rendre le residu affichable avec une normalisation min-max
+def build_residual_view(residual):
+    return cv2.normalize(residual, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
