@@ -19,7 +19,7 @@ BLOCKS_WINDOW = "Reference | Best match | Difference (x4)"
 ESC_KEY = 27
 NO_KEY = 255
 KEY_POLL_DELAY_MS = 50
-SUMMARY_HEADER = ["test", "x1", "y1", "x2", "y2", "dx", "dy", "sad", "mean_difference"]
+SUMMARY_HEADER = ["test", "x1", "y1", "x2", "y2", "dx", "dy", "mse", "mean_difference"]
 
 # lit les farmes
 def parse_arguments():
@@ -81,7 +81,7 @@ def build_record(index, rect, result):
         "y2": rect[3],
         "dx": result.dx,
         "dy": result.dy,
-        "sad": result.sad,
+        "mse": round(result.mse, 3),
         "mean_difference": round(result.mean_difference, 3),
     }
 
@@ -89,11 +89,11 @@ def build_record(index, rect, result):
 # print le tableau récapitulatif
 def print_summary(records):
     print()
-    print(f"{'Test':>4}  {'Rectangle (x1, y1, x2, y2)':<28}{'(dx, dy)':<10}{'SAD':>10}{'Mean diff':>12}")
+    print(f"{'Test':>4}  {'Rectangle (x1, y1, x2, y2)':<28}{'(dx, dy)':<10}{'MSE':>10}{'Mean diff':>12}")
     for r in records:
         rectangle = f"({r['x1']}, {r['y1']}, {r['x2']}, {r['y2']})"
         shift = f"({r['dx']}, {r['dy']})"
-        print(f"{r['test']:>4}  {rectangle:<28}{shift:<10}{r['sad']:>10}{r['mean_difference']:>12}")
+        print(f"{r['test']:>4}  {rectangle:<28}{shift:<10}{r['mse']:>10}{r['mean_difference']:>12}")
 
 
 def save_summary(records):
